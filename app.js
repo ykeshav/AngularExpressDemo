@@ -2,6 +2,7 @@ var express = require('express');
 var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
+var mongoose = require('mongoose');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 
@@ -10,7 +11,15 @@ var routes = require('./routes/index');
 var config = require('./config/config');
 
 var app = express();
-
+mongoose.connect(config.db_url);
+var Product = mongoose.model("product", {name: String});
+var product = new Product({name: "intellij"});
+Product.save(product, function (err) {
+    if (err)
+        console.log('failed');
+    else
+        console.log('saved');
+});
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');

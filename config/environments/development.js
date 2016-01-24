@@ -1,4 +1,4 @@
 module.exports = {
   hostname: "localhost",
-  db_url: "mongodb://localhost/test"
+  db_url: "mongodb://localhost/jetbrains"
 }
