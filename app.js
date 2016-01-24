@@ -12,14 +12,19 @@ var config = require('./config/config');
 
 var app = express();
 mongoose.connect(config.db_url);
-var Product = mongoose.model("product", {name: String});
+var Product = mongoose.model("Product", {name: String});
 var product = new Product({name: "intellij"});
-Product.save(product, function (err) {
+product.save(function (err) {
     if (err)
         console.log('failed');
     else
         console.log('saved');
 });
+
+Product.find(function (err, products) {
+    console.log(JSON.stringify(products));
+});
+
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'jade');
